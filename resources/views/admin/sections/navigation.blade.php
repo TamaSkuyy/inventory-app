@@ -42,16 +42,11 @@
                             <i class="fa fa-users" aria-hidden="true"></i>
                             {{ __('views.backend.section.navigation.menu_1_1') }}
                         </a>
-                    </li><li>
-                        <a href="{{ route('admin.users.restore') }}">
-                            <i class="fa fa-users" aria-hidden="true"></i>
-                            {{ __('views.backend.section.navigation.menu_1_3') }}
-                        </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.permissions') }}">
-                            <i class="fa fa-key" aria-hidden="true"></i>
-                            {{ __('views.backend.section.navigation.menu_1_2') }}
+                        <a href="{{ route('master.barang') }}">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            {{ __('Barang') }}
                         </a>
                     </li>
                 </ul>

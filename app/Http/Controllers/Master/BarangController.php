@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+// use Auth;
 
 
 class BarangController extends Controller
@@ -30,6 +31,7 @@ class BarangController extends Controller
         // $query = Barang::get();
 
         // return $query;
+        // return array('barangs' => Barang::sortable(['barangKode' => 'asc'])->paginate());
         return view('master.barang.index', ['barangs' => Barang::sortable(['barangKode' => 'asc'])->paginate()]);
     }
 
@@ -62,7 +64,8 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        //
+        // return $barang;
+        return view('master.barang.show', ['barang' => $barang]);
     }
 
     /**
@@ -73,7 +76,7 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        return view('master.barang.edit', ['barang' => $barang]);
     }
 
     /**
@@ -83,9 +86,27 @@ class BarangController extends Controller
      * @param  \App\Models\Master\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBarangRequest $request, Barang $barang)
+    public function update(Request $request, Barang $barang)
     {
-        //
+        // return Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'barangKode'    => 'required|max:255',
+            'barangNama'    => 'required|max:255',
+            'barangSatuan'  => 'sometimes',
+            'barangHarga'   => 'sometimes|numeric',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
+
+        $barang->barangKode = $request->get('barangKode');
+        $barang->barangNama = $request->get('barangNama');
+        $barang->barangSatuan = $request->get('barangSatuan');
+        $barang->barangHarga = $request->get('barangHarga');
+
+        $barang->save();
+
+        return redirect()->intended(route('master.barang'));
     }
 
     /**

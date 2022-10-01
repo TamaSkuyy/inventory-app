@@ -81,8 +81,14 @@ Route::group(['as' => 'protection.'], function () {
     Route::get('membership/clear-cache/', 'MembershipController@clearValidationCache')->name('membership.clear_validation_cache');
 });
 
-Route::prefix('barang')->group(function () {
-    Route::get('/', [BarangController::class, 'index'])->name('index');
+/**
+ * Master Barang
+ */
+Route::group(['prefix' => 'master', 'as' => 'master.', 'namespace' => 'Master'], function () {
+    Route::get('barang', [BarangController::class, 'index'])->name('barang');
+    Route::get('barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
+    Route::get('barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
+    Route::put('barang/{barang}', [BarangController::class, 'update'])->name('barang.update');
 });
 
 // Route::get('/greeting', function () {
