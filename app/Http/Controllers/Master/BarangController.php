@@ -106,7 +106,7 @@ class BarangController extends Controller
 
         $barang->save();
 
-        return redirect()->intended(route('master.barang'));
+        return redirect()->intended(route('master.barang'))->withFlashSuccess('Data Berhasil Diupdate!');
     }
 
     /**
@@ -115,8 +115,16 @@ class BarangController extends Controller
      * @param  \App\Models\Master\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang $barang)
+    public function destroy($id)
     {
-        //
+        // return $id;
+        $status = DB::table('barang')->where('barangId','=',$id)->delete();;
+
+        if($status)
+        {
+            return redirect()->route('master.barang')->withFlashSuccess('Data Berhasil Dihapus!');
+        }
+
+        return redirect()->route('master.barang')->withFlashDanger('Data Gagal Dihapus!');
     }
 }

@@ -39,7 +39,7 @@
                         <a class="btn btn-xs btn-info" href="{{ route('master.barang.edit', [$barang->barangId]) }}" data-toggle="tooltip" data-placement="top" data-title="{{ __('Edit') }}">
                             <i class="fa fa-pencil"></i>
                         </a>
-                        <a href="" class="btn btn-xs btn-danger user_destroy" data-toggle="tooltip" data-placement="top" data-title="{{ __('Hapus') }}">
+                        <a href="{{ route('master.barang.destroy', [$barang->barangId]) }}" class="btn btn-xs btn-danger user_destroy" data-toggle="tooltip" data-placement="top" data-title="{{ __('Hapus') }}">
                             <i class="fa fa-trash"></i>
                         </a>
                         </td>

@@ -89,6 +89,7 @@ Route::group(['prefix' => 'master', 'as' => 'master.', 'namespace' => 'Master'],
     Route::get('barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
     Route::get('barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
     Route::put('barang/{barang}', [BarangController::class, 'update'])->name('barang.update');
+    Route::any('barang/destroy/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
 });
 
 // Route::get('/greeting', function () {
