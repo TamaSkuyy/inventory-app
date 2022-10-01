@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\Master\BarangController;
+
 
 /**
  * Auth routes
@@ -78,3 +80,11 @@ Route::group(['as' => 'protection.'], function () {
     Route::get('membership/access-denied', 'MembershipController@failed')->name('membership.failed');
     Route::get('membership/clear-cache/', 'MembershipController@clearValidationCache')->name('membership.clear_validation_cache');
 });
+
+Route::prefix('barang')->group(function () {
+    Route::get('/', [BarangController::class, 'index'])->name('index');
+});
+
+// Route::get('/greeting', function () {
+//     return 'Hello World';
+// });
