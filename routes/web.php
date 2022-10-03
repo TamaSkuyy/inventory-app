@@ -12,6 +12,8 @@
 */
 
 use App\Http\Controllers\Master\BarangController;
+use App\Http\Controllers\Master\SuplierController;
+use App\Http\Controllers\Master\PelangganController;
 
 
 /**
@@ -82,15 +84,38 @@ Route::group(['as' => 'protection.'], function () {
 });
 
 /**
- * Master Barang
+ * Master
  */
 Route::group(['prefix' => 'master', 'as' => 'master.', 'namespace' => 'Master'], function () {
+    //Barang
     Route::get('barang', [BarangController::class, 'index'])->name('barang');
+    Route::get('barang/create', [BarangController::class, 'create'])->name('barang.create');
+    Route::post('barang/store', [BarangController::class, 'store'])->name('barang.store');
     Route::get('barang/{barang}', [BarangController::class, 'show'])->name('barang.show');
     Route::get('barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
     Route::put('barang/{barang}', [BarangController::class, 'update'])->name('barang.update');
     Route::any('barang/destroy/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
+
+    //Suplier
+    Route::get('suplier', [SuplierController::class, 'index'])->name('suplier');
+    Route::get('suplier/create', [SuplierController::class, 'create'])->name('suplier.create');
+    Route::post('suplier/store', [SuplierController::class, 'store'])->name('suplier.store');
+    Route::get('suplier/{suplier}', [SuplierController::class, 'show'])->name('suplier.show');
+    Route::get('suplier/edit/{suplier}', [SuplierController::class, 'edit'])->name('suplier.edit');
+    Route::put('suplier/{suplier}', [SuplierController::class, 'update'])->name('suplier.update');
+    Route::any('suplier/destroy/{id}', [SuplierController::class, 'destroy'])->name('suplier.destroy');
+
+    //Pelanggan
+    Route::get('pelanggan', [PelangganController::class, 'index'])->name('pelanggan');
+    Route::get('pelanggan/create', [PelangganController::class, 'create'])->name('pelanggan.create');
+    Route::post('pelanggan/store', [PelangganController::class, 'store'])->name('pelanggan.store');
+    Route::get('pelanggan/{pelanggan}', [PelangganController::class, 'show'])->name('pelanggan.show');
+    Route::get('pelanggan/edit/{pelanggan}', [PelangganController::class, 'edit'])->name('pelanggan.edit');
+    Route::put('pelanggan/{pelanggan}', [PelangganController::class, 'update'])->name('pelanggan.update');
+    Route::any('pelanggan/destroy/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
 });
+
+
 
 // Route::get('/greeting', function () {
 //     return 'Hello World';

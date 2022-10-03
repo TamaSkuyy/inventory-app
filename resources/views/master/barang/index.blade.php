@@ -5,9 +5,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            <a class="btn btn-primary" href="{{ route('master.barang.create') }}" data-toggle="tooltip" data-placement="top"">
                 Tambah Data
-            </button>
+             </a>
         </div>
     </div>
     <div class="row">

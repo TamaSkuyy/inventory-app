@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            {{ Form::open(['route'=>['master.barang.update', $barang->barangId],'method' => 'put','class'=>'form-horizontal form-label-left']) }}
+            {{ Form::open(['route'=>['master.barang.update', $barang->barangId],'method' => 'put', 'files' => true,'class'=>'form-horizontal form-label-left']) }}
 
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="barangKode" >
@@ -76,6 +76,18 @@
                                 @endforeach
                             </ul>
                         @endif
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="barangImg" >
+                        {{ __('Gambar') }}
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="file" name="barangImg" placeholder="Pilih Gambar" id="barangImg">
+                        @error('barangImg')
+                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 

@@ -10,6 +10,7 @@ use App\Repositories\Access\User\EloquentUserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 // use Auth;
 
@@ -42,7 +43,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('master.barang.create');
     }
 
     /**
@@ -51,9 +52,41 @@ class BarangController extends Controller
      * @param  \App\Http\Requests\StoreBarangRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBarangRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'barangKode'    => 'required|max:255',
+            'barangNama'    => 'required|max:255',
+            'barangSatuan'  => 'sometimes',
+            'barangHarga'   => 'sometimes|numeric',
+            'barangImg'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
+
+        $barang = new Barang;
+ 
+        $barang->barangKode = $request->get('barangKode');
+        $barang->barangNama = $request->get('barangNama');
+        $barang->barangSatuan = $request->get('barangSatuan');
+        $barang->barangHarga = $request->get('barangHarga');
+
+        if($file = $request->file('barangImg')) {
+            $name = $request->file('barangImg')->getClientOriginalName();
+            $path = $request->file('barangImg')->storeAs('public/images/barang', $name);
+
+            $barang->barangImg = $name;
+            $barang->barangPath = $path;
+        }
+ 
+        $barang->save();
+
+        if($barang)
+        {
+            return redirect()->intended(route('master.barang'))->withFlashSuccess('Data Berhasil Disimpan!');
+        }
+
+        return redirect()->route('master.barang')->withFlashDanger('Data Gagal Disimpan!');
     }
 
     /**
@@ -88,13 +121,14 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        // return Auth::user();
+        // return $barang;
 
         $validator = Validator::make($request->all(), [
             'barangKode'    => 'required|max:255',
             'barangNama'    => 'required|max:255',
             'barangSatuan'  => 'sometimes',
             'barangHarga'   => 'sometimes|numeric',
+            'barangImg'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withErrors($validator->errors());
@@ -103,6 +137,24 @@ class BarangController extends Controller
         $barang->barangNama = $request->get('barangNama');
         $barang->barangSatuan = $request->get('barangSatuan');
         $barang->barangHarga = $request->get('barangHarga');
+
+        if($file = $request->file('barangImg')) {
+
+            $img = DB::table('barang')->where('barangId','=',$barang->barangId)->get();
+
+            $image_path = !empty($img[0]->barangPath) ? $img[0]->barangPath : '';
+
+            if(Storage::exists($image_path)) {
+                Storage::delete($image_path);
+            }
+
+            $name = $request->file('barangImg')->getClientOriginalName();
+            $path = $request->file('barangImg')->storeAs('public/images/barang', $name);
+
+            $barang->barangImg = $name;
+            $barang->barangPath = $path;
+        }
+ 
 
         $barang->save();
 
@@ -118,10 +170,17 @@ class BarangController extends Controller
     public function destroy($id)
     {
         // return $id;
+        $img = DB::table('barang')->where('barangId','=',$id)->get();
         $status = DB::table('barang')->where('barangId','=',$id)->delete();;
 
         if($status)
         {
+            $image_path = !empty($img[0]->barangPath) ? $img[0]->barangPath : '';
+
+            if(Storage::exists($image_path)) {
+                Storage::delete($image_path);
+            }
+            
             return redirect()->route('master.barang')->withFlashSuccess('Data Berhasil Dihapus!');
         }
 

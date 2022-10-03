@@ -44,10 +44,28 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('master.barang') }}">
-                            <i class="fa fa-list" aria-hidden="true"></i>
-                            {{ __('Barang') }}
+                        <a>
+                            <i class="fa fa-list"></i>
+                            {{ __('Master') }}
+                            <span class="fa fa-chevron-down"></span>
                         </a>
+                        <ul class="nav child_menu">
+                            <li>
+                                <a href="{{ route('master.barang') }}">
+                                    {{ __('Barang') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('master.suplier') }}">
+                                    {{ __('Suplier') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('master.pelanggan') }}">
+                                    {{ __('Pelanggan') }}
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

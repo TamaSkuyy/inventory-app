@@ -28,6 +28,17 @@
                 </tr>
 
                 <tr>
+                    <th>{{ __('Gambar') }}</th>
+                    <td>
+                        @if($barang->barangPath == '')
+                            <img src="{{@App::make('url')->to('/').'/storage/images/barang/default-placeholder.png' }}" style="height: 200px;width:150px;"></img>
+                        @else
+                            <img src="{{@App::make('url')->to('/').'/'. str_replace('public','storage',$barang->barangPath) }}" style="height: 200px;width:150px;"></img>
+                        @endif
+                    </td>
+                </tr>
+
+                <tr>
                     <th>{{ __('User') }}</th>
                     <td>{{ $barang->created_user }}</td>
                 </tr>
