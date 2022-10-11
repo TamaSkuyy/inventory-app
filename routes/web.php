@@ -11,9 +11,13 @@
 |
 */
 
+//master
 use App\Http\Controllers\Master\BarangController;
 use App\Http\Controllers\Master\SuplierController;
 use App\Http\Controllers\Master\PelangganController;
+
+//transaksi
+use App\Http\Controllers\Transaksi\PenerimaanController;
 
 
 /**
@@ -95,6 +99,8 @@ Route::group(['prefix' => 'master', 'as' => 'master.', 'namespace' => 'Master'],
     Route::get('barang/edit/{barang}', [BarangController::class, 'edit'])->name('barang.edit');
     Route::put('barang/{barang}', [BarangController::class, 'update'])->name('barang.update');
     Route::any('barang/destroy/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
+        //autocomplete
+        Route::get('barangforcombo', [BarangController::class,'search']);
 
     //Suplier
     Route::get('suplier', [SuplierController::class, 'index'])->name('suplier');
@@ -104,6 +110,8 @@ Route::group(['prefix' => 'master', 'as' => 'master.', 'namespace' => 'Master'],
     Route::get('suplier/edit/{suplier}', [SuplierController::class, 'edit'])->name('suplier.edit');
     Route::put('suplier/{suplier}', [SuplierController::class, 'update'])->name('suplier.update');
     Route::any('suplier/destroy/{id}', [SuplierController::class, 'destroy'])->name('suplier.destroy');
+        //autocomplete
+        Route::get('suplierforcombo', [SuplierController::class,'search']);
 
     //Pelanggan
     Route::get('pelanggan', [PelangganController::class, 'index'])->name('pelanggan');
@@ -113,9 +121,20 @@ Route::group(['prefix' => 'master', 'as' => 'master.', 'namespace' => 'Master'],
     Route::get('pelanggan/edit/{pelanggan}', [PelangganController::class, 'edit'])->name('pelanggan.edit');
     Route::put('pelanggan/{pelanggan}', [PelangganController::class, 'update'])->name('pelanggan.update');
     Route::any('pelanggan/destroy/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
+        //autocomplete
+        Route::get('pelangganforcombo', [PelangganController::class,'search']);
 });
 
-
+Route::group(['prefix' => 'transaksi', 'as' => 'transaksi.', 'namespace' => 'Transaksi'], function () {
+    //Penerimaan
+    Route::get('penerimaan', [PenerimaanController::class, 'index'])->name('penerimaan');
+    Route::get('penerimaan/create', [PenerimaanController::class, 'create'])->name('penerimaan.create');
+    Route::post('penerimaan/store', [PenerimaanController::class, 'store'])->name('penerimaan.store');
+    Route::get('penerimaan/{penerimaan}', [PenerimaanController::class, 'show'])->name('penerimaan.show');
+    Route::get('penerimaan/edit/{penerimaan}', [PenerimaanController::class, 'edit'])->name('penerimaan.edit');
+    Route::put('penerimaan/{penerimaan}', [PenerimaanController::class, 'update'])->name('penerimaan.update');
+    Route::any('penerimaan/destroy/{id}', [PenerimaanController::class, 'destroy'])->name('penerimaan.destroy');
+});
 
 // Route::get('/greeting', function () {
 //     return 'Hello World';

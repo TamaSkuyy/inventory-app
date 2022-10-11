@@ -10,12 +10,12 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "dependencies": {
-    "guidechimp": "^4.2.1",
     "axios": "^0.21.2",
-    "bootstrap": "^3.4",
+    "bootstrap": "^3.4.1",
     "cross-env": "^7.0.2",
     "font-awesome": "^4.7.0",
     "gentelella": "^1.4",
+    "guidechimp": "^4.2.1",
     "jcarousel": "^0.3.9",
     "jquery": "^3.4.1",
     "laravel-mix": "^5.0.4",
@@ -26,5 +26,6 @@
     "sass-loader": "^8.0.2",
     "select2": "^4.0.13",
     "vue": "^2.6.11"
-  }
+  },
+  "devDependencies": {}
 }

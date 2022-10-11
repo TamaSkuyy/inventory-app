@@ -2,3 +2,7 @@
     margin-top: 20px;
     cursor: pointer;
 }
+
+.panel-default > .panel-heading{
+    color: #73879C;
+}

@@ -92,3 +92,29 @@ Breadcrumbs::register('master.pelanggan.edit', function (Generator $breadcrumbs,
     $breadcrumbs->push(__('Pelanggan'), route('master.pelanggan'));
     $breadcrumbs->push(__('Edit "') . $pelanggan->pelNama . '"');
 });
+//
+
+//transaksi
+//-penerimaan
+Breadcrumbs::register('transaksi.penerimaan', function (Generator $breadcrumbs) {
+    $breadcrumbs->push(__('views.admin.dashboard.title'), route('admin.dashboard'));
+    $breadcrumbs->push(__('Penerimaan'));
+});
+
+Breadcrumbs::register('transaksi.penerimaan.show', function (Generator $breadcrumbs, \App\Models\Transaksi\Penerimaan $penerimaan) {
+    $breadcrumbs->push(__('views.admin.dashboard.title'), route('admin.dashboard'));
+    $breadcrumbs->push(__('Penerimaan'), route('transaksi.penerimaan'));
+    $breadcrumbs->push(__('Penerimaan "') . $penerimaan->terimaNomor . '"');
+});
+
+Breadcrumbs::register('transaksi.penerimaan.create', function (Generator $breadcrumbs) {
+    $breadcrumbs->push(__('views.admin.dashboard.title'), route('admin.dashboard'));
+    $breadcrumbs->push(__('Penerimaan'), route('transaksi.penerimaan'));
+    $breadcrumbs->push(__('Tambah Data'));
+});
+
+Breadcrumbs::register('transaksi.penerimaan.edit', function (Generator $breadcrumbs, \App\Models\Transaksi\Penerimaan $penerimaan) {
+    $breadcrumbs->push(__('views.admin.dashboard.title'), route('admin.dashboard'));
+    $breadcrumbs->push(__('Penerimaan'), route('transaksi.penerimaan'));
+    $breadcrumbs->push(__('Edit "') . $penerimaan->terimaNomor . '"');
+});

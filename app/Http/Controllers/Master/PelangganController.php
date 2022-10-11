@@ -148,4 +148,19 @@ class PelangganController extends Controller
 
         return redirect()->route('master.pelanggan')->withFlashDanger('Data Gagal Dihapus!');
     }
+
+    public function search(Request $request)
+    {
+    	$pelanggan = [];
+
+        // if($request->has('q')){
+            $search = $request->q;
+            $pelanggan =Pelanggan::select("pelKode as id", DB::raw("CONCAT(pelKode,' - ',pelNama) as name"), "pelNama")
+            		->where('pelKode', 'LIKE', "%$search%")
+            		->orwhere('pelNama', 'LIKE', "%$search%")
+            		->get();
+        // }
+
+        return response()->json($pelanggan);
+    }
 }

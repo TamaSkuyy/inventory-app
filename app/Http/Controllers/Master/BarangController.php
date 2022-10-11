@@ -7,11 +7,13 @@ use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
 use App\Models\Master\Barang;
 use App\Repositories\Access\User\EloquentUserRepository;
+use App\Tables\BarangTable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use \Illuminate\View\View;
 // use Auth;
 
 
@@ -27,12 +29,13 @@ class BarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // $query = Barang::get();
 
         // return $query;
         // return array('barangs' => Barang::sortable(['barangKode' => 'asc'])->paginate());
+    
         return view('master.barang.index', ['barangs' => Barang::sortable(['barangKode' => 'asc'])->paginate()]);
     }
 
@@ -185,5 +188,20 @@ class BarangController extends Controller
         }
 
         return redirect()->route('master.barang')->withFlashDanger('Data Gagal Dihapus!');
+    }
+
+    public function search(Request $request)
+    {
+    	$barang = [];
+
+        // if($request->has('q')){
+            $search = $request->q;
+            $barang =Barang::select("barangKode as id", DB::raw("CONCAT(barangKode,' - ',barangNama) as name"), "barangNama")
+            		->where('barangKode', 'LIKE', "%$search%")
+            		->orwhere('barangNama', 'LIKE', "%$search%")
+            		->get();
+        // }
+
+        return response()->json($barang);
     }
 }

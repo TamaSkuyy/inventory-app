@@ -67,42 +67,20 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
-            </div>
-            <div class="menu_section">
-                <h3>{{ __('views.backend.section.navigation.sub_header_2') }}</h3>
-
-                <ul class="nav side-menu">
                     <li>
                         <a>
-                            <i class="fa fa-list"></i>
-                            {{ __('views.backend.section.navigation.menu_2_1') }}
+                            <i class="fa fa-pencil"></i>
+                            {{ __('Transaksi') }}
                             <span class="fa fa-chevron-down"></span>
                         </a>
                         <ul class="nav child_menu">
                             <li>
-                                <a href="{{ route('log-viewer::dashboard') }}">
-                                    {{ __('views.backend.section.navigation.menu_2_2') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('log-viewer::logs.list') }}">
-                                    {{ __('views.backend.section.navigation.menu_2_3') }}
+                                <a href="{{ route('transaksi.penerimaan') }}">
+                                    {{ __('Penerimaan') }}
                                 </a>
                             </li>
                         </ul>
                     </li>
-                </ul>
-            </div>
-            <div class="menu_section">
-                <h3>{{ __('views.backend.section.navigation.sub_header_3') }}</h3>
-                <ul class="nav side-menu">
-                  <li>
-                      <a href="https://l64.cc/nlaff/VXZPYHCTC" target="_blank" title="Online Software License Management"><i class="fa fa-external-link" aria-hidden="true"></i>Labs64 NetLicensing</a>
-                  </li>
-                  <li>
-                      <a href="https://www.labs64.com/guidechimp/" target="_blank" title="Interactive Guided Product Tours"><i class="fa fa-external-link" aria-hidden="true"></i>GuideChimp</a>
-                  </li>
                 </ul>
             </div>
         </div>

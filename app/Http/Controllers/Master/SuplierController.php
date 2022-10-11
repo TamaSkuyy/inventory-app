@@ -148,4 +148,19 @@ class SuplierController extends Controller
 
         return redirect()->route('master.suplier')->withFlashDanger('Data Gagal Dihapus!');
     }
+
+    public function search(Request $request)
+    {
+    	$suplier = [];
+
+        // if($request->has('q')){
+            $search = $request->q;
+            $suplier =Suplier::select("supKode as id", DB::raw("CONCAT(supKode,' - ',supNama) as name"), "supNama")
+            		->where('supKode', 'LIKE', "%$search%")
+            		->orwhere('supNama', 'LIKE', "%$search%")
+            		->get();
+        // }
+
+        return response()->json($suplier);
+    }
 }

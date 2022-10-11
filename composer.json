@@ -26,13 +26,16 @@
         "creativeorange/gravatar": "^1.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.2",
         "fruitcake/laravel-cors": "^1.0",
+        "kdion4891/laravel-livewire-tables": "^1.6",
         "kyslik/column-sortable": "^6.1",
         "labs64/netlicensingclient-php": "^2.4",
         "laravel/framework": "^8.0",
         "laravel/socialite": "^5.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "laravelcollective/html": "^6.1.0"
+        "laravelcollective/html": "^6.1.0",
+        "livewire/livewire": "^2.10",
+        "twbs/bootstrap": "4.6.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
@@ -69,7 +72,8 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "@php artisan package:discover",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ]
     },
     "config": {
